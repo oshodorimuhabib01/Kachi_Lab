@@ -74,7 +74,8 @@ export function ProductsSection() {
   return (
     <section id="products" className="py-24 bg-secondary/30">
       <div className="container mx-auto px-4">
-        <div className="mb-16 text-center">
+        {/* Section header with animation */}
+        <div className="mb-16 text-center animate-fade-in-up">
           <h2 className="mb-4 text-4xl font-bold tracking-tight text-foreground">
             Our Innovation <span className="text-primary">Portfolio</span>
           </h2>
@@ -83,21 +84,31 @@ export function ProductsSection() {
           </p>
         </div>
 
+        {/* Product grid with staggered animations */}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {products.map((product) => (
+          {products.map((product, index) => (
             <Card
               key={product.name}
-              className="group border-border bg-card transition-all hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10"
+              className="group border-border bg-card transition-all hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 hover-lift animate-fade-in-up cursor-pointer"
+              style={{ animationDelay: `${index * 0.1}s` }}
             >
               <CardHeader>
+                {/* Animated icon */}
                 <div
-                  className={`mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 ${product.color}`}
+                  className={`mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 ${product.color} transition-all duration-300 group-hover:scale-110 group-hover:rotate-6`}
                 >
                   <product.icon className="h-6 w-6" />
                 </div>
-                <CardTitle className="text-card-foreground">{product.name}</CardTitle>
-                <CardDescription className="text-pretty leading-relaxed">{product.description}</CardDescription>
+                
+                <CardTitle className="text-card-foreground transition-colors group-hover:text-primary">
+                  {product.name}
+                </CardTitle>
+                
+                <CardDescription className="text-pretty leading-relaxed">
+                  {product.description}
+                </CardDescription>
               </CardHeader>
+              
               <CardContent>
                 <Button
                   variant="ghost"
